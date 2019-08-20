@@ -24,7 +24,7 @@ services:
     image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-api
     build:
       context: .
-      dockerfile: docker/pulp/Dockerfile
+      dockerfile: compose/production/pulp/Dockerfile
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'api']
@@ -40,7 +40,7 @@ services:
     image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-resource-manager
     build:
       context: .
-      dockerfile: docker/pulp/Dockerfile
+      dockerfile: compose/production/pulp/Dockerfile
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'resource-manager']
@@ -54,7 +54,7 @@ services:
     image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-worker
     build:
       context: .
-      dockerfile: docker/pulp/Dockerfile
+      dockerfile: compose/production/pulp/Dockerfile
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'worker']
@@ -68,7 +68,7 @@ services:
     image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-content-app
     build:
       context: .
-      dockerfile: docker/pulp/Dockerfile
+      dockerfile: compose/production/pulp/Dockerfile
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'content-app']
@@ -89,6 +89,8 @@ services:
 
   redis:
     image: registry.access.redhat.com/rhscl/redis-32-rhel7
+    ports:
+      - '6379:6379'
     volumes:
       - redis_data:/data
 

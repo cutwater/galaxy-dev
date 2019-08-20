@@ -31,8 +31,8 @@ RUN python3.6 -m venv "${PULP_VENV}" \
 
 ENV PATH="/venv/bin:$PATH"
 
-COPY docker/pulp/entrypoint.sh /entrypoint
-COPY docker/pulp/settings.py etc/pulp/settings.py
+COPY compose/production/pulp/entrypoint.sh /entrypoint
+COPY compose/production/pulp/settings.py etc/pulp/settings.py
 
 VOLUME /data/
 

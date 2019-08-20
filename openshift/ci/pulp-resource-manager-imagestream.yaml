@@ -10,7 +10,7 @@ spec:
   - annotations: null
     from:
       kind: DockerImage
-      name: registry.insights-dev.openshift.com/automation-hub-ci/pulp
+      name: registry.insights-dev.openshift.com/automation-hub-ci/pulp-resource-manager
     generation: null
     importPolicy: {}
     name: latest

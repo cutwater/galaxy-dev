@@ -20,7 +20,7 @@ services:
       - postgres
 
   pulp-api:
-    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp
+    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-api
     build:
       context: .
       dockerfile: docker/pulp/Dockerfile
@@ -36,7 +36,10 @@ services:
       - redis
 
   pulp-resource-manager:
-    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp
+    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-resource-manager
+    build:
+      context: .
+      dockerfile: docker/pulp/Dockerfile
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'resource-manager']
@@ -47,7 +50,10 @@ services:
       - redis
 
   pulp-worker:
-    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp
+    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-worker
+    build:
+      context: .
+      dockerfile: docker/pulp/Dockerfile
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'worker']
@@ -58,7 +64,10 @@ services:
       - redis
 
   pulp-content-app:
-    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp
+    image: registry.insights-dev.openshift.com/automation-hub-ci/pulp-content-app
+    build:
+      context: .
+      dockerfile: docker/pulp/Dockerfile
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'content-app']
@@ -76,7 +85,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   redis:
-    image: registry.access.redhat.com/rhel8/redis-5
+    image: registry.access.redhat.com/rhscl/redis-32-rhel7
     volumes:
       - redis_data:/data
 

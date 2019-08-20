@@ -50,3 +50,15 @@ docker/destroy:
 docker/run-migrations:
 	docker-compose run --rm pulp-api manage migrate
 	docker-compose run --rm galaxy-api manage migrate
+
+.PHONY: kompose/convert-ci
+kompose/convert-ci:
+	cd openshift/ci && kompose -f ../../production-ci.yml --provider OpenShift convert
+
+.PHONY: docker/build-ci
+docker/build-ci:
+	docker-compose -f production-ci.yml build
+
+.PHONY: docker/push-ci
+docker/push-ci:
+	docker-compose -f production-ci.yml push

@@ -22,7 +22,33 @@ spec:
         io.kompose.service: postgres
     spec:
       containers:
-      - image: ' '
+      - env:
+        - name: POSTGRESQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_DATABASE
+              name: postgres-env--production--postgres
+        - name: POSTGRESQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_HOST
+              name: postgres-env--production--postgres
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_PASSWORD
+              name: postgres-env--production--postgres
+        - name: POSTGRESQL_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_PORT
+              name: postgres-env--production--postgres
+        - name: POSTGRESQL_USER
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_USER
+              name: postgres-env--production--postgres
+        image: ' '
         name: postgres
         ports:
         - containerPort: 5432

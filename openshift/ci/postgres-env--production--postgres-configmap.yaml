@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  POSTGRESQL_DATABASE: galaxy
+  POSTGRESQL_HOST: postgres
+  POSTGRESQL_PASSWORD: galaxy123
+  POSTGRESQL_PORT: "5432"
+  POSTGRESQL_USER: galaxy
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres-env--production--postgres
+  name: postgres-env--production--postgres

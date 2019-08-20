@@ -42,6 +42,31 @@ spec:
             configMapKeyRef:
               key: GALAXY_SECRET_KEY
               name: galaxy-api-env--production--galaxy-api
+        - name: POSTGRESQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_DATABASE
+              name: galaxy-api-env--production--postgres
+        - name: POSTGRESQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_HOST
+              name: galaxy-api-env--production--postgres
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_PASSWORD
+              name: galaxy-api-env--production--postgres
+        - name: POSTGRESQL_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_PORT
+              name: galaxy-api-env--production--postgres
+        - name: POSTGRESQL_USER
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRESQL_USER
+              name: galaxy-api-env--production--postgres
         image: ' '
         name: galaxy-api
         ports:

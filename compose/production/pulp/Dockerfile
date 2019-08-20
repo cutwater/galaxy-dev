@@ -18,19 +18,21 @@ RUN mkdir -p /var/run/pulp \
 
 COPY docker/pulp/requirements.txt /tmp/pulp/
 
+COPY pulp-ansible /code/pulp-ansible
+
 RUN python3.6 -m venv "${PULP_VENV}" \
     && source "${PULP_VENV}/bin/activate" \
     && pip --no-cache-dir install -U \
         'pip<19.0' \
         wheel \
     && cd /tmp/pulp \
-    && pip install -r requirements.txt
+    && pip install -r requirements.txt \
+    && pip install -e /code/pulp-ansible
 
 ENV PATH="/venv/bin:$PATH"
 
 COPY docker/pulp/entrypoint.sh /entrypoint
 COPY docker/pulp/settings.py etc/pulp/settings.py
-COPY pulp-ansible /code/pulp-ansible
 
 VOLUME /data/
 

@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  GALAXY_DB_HOST: postgres
+  GALAXY_DB_PASSWORD: galaxy123
+  GALAXY_DEBUG: "True"
+  GALAXY_SECRET_KEY: secret
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: galaxy-api-env--production--galaxy-api
+  name: galaxy-api-env--production--galaxy-api

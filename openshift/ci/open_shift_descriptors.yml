@@ -1,0 +1,31 @@
+---
+descriptors:
+  - automation-hub-backend-deploymentconfig.yaml
+  - automation-hub-backend-imagestream.yaml
+  - automation-hub-backend-service.yaml
+  - galaxy-api-deploymentconfig.yaml
+  - galaxy-api-env--production--galaxy-api-configmap.yaml
+  - galaxy-api-imagestream.yaml
+  - galaxy-api-service.yaml
+  - postgres-data-persistentvolumeclaim.yaml
+  - postgres-deploymentconfig.yaml
+  - postgres-imagestream.yaml
+  - postgres-service.yaml
+  - pulp-api-deploymentconfig.yaml
+  - pulp-api-env--production--pulp-configmap.yaml
+  - pulp-api-imagestream.yaml
+  - pulp-api-service.yaml
+  - pulp-content-app-deploymentconfig.yaml
+  - pulp-content-app-env--production--pulp-configmap.yaml
+  - pulp-content-app-imagestream.yaml
+  - pulp-data-persistentvolumeclaim.yaml
+  - pulp-resource-manager-deploymentconfig.yaml
+  - pulp-resource-manager-env--production--pulp-configmap.yaml
+  - pulp-resource-manager-imagestream.yaml
+  - pulp-worker-deploymentconfig.yaml
+  - pulp-worker-env--production--pulp-configmap.yaml
+  - pulp-worker-imagestream.yaml
+  - redis-data-persistentvolumeclaim.yaml
+  - redis-deploymentconfig.yaml
+  - redis-imagestream.yaml
+...

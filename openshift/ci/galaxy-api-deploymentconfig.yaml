@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose -f ../../production-ci.yml --provider OpenShift convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: galaxy-api
+  name: galaxy-api
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: galaxy-api
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: galaxy-api
+    spec:
+      containers:
+      - env:
+        - name: GALAXY_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_DB_HOST
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_DB_PASSWORD
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_DEBUG
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_DEBUG
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_SECRET_KEY
+              name: galaxy-api-env--production--galaxy-api
+        image: ' '
+        name: galaxy-api
+        ports:
+        - containerPort: 8000
+        resources: {}
+      restartPolicy: Always
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - galaxy-api
+      from:
+        kind: ImageStreamTag
+        name: galaxy-api:latest
+    type: ImageChange
+status: {}

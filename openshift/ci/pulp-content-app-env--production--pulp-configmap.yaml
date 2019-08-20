@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  PULP_DB_HOST: postgres
+  PULP_DB_PASSWORD: pulp123
+  PULP_DEBUG: "True"
+  PULP_REDIS_HOST: redis
+  PULP_SECRET_KEY: secret
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pulp-content-app-env--production--pulp
+  name: pulp-content-app-env--production--pulp

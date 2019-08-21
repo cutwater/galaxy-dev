@@ -7,8 +7,8 @@ metadata:
   name: pulp-data
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
-      storage: 10G
+      storage: 10Gi
 status: {}

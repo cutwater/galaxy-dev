@@ -1,3 +1,15 @@
+# Stage 1: Build galaxy-pulp from openapi spec
+FROM openapitools/openapi-generator-cli AS galaxy-pulp
+
+COPY galaxy-api/bindings/openapi.yaml /local/openapi.yaml
+RUN docker-entrypoint.sh generate \
+    -i /local/openapi.yaml \
+    -g python \
+    -o /local/galaxy-pulp \
+    --skip-validate-spec \
+    --additional-properties=packageName=galaxy_pulp,projectName=galaxy-pulp
+
+# Stage 2: Build galaxy image
 FROM centos:7
 
 ENV PYTHONUNBUFFERED=1 \
@@ -33,6 +45,9 @@ RUN python3.6 -m venv "${GALAXY_VENV}" \
     && pip install -e /code/galaxy-api \
     && pip install uwsgi
 
+COPY --from=galaxy-pulp /local/galaxy-pulp /tmp/galaxy-pulp
+RUN source "${GALAXY_VENV}/bin/activate" \
+    && pip install /tmp/galaxy-pulp
 
 WORKDIR /code/
 

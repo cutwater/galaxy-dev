@@ -6,4 +6,4 @@ set -o nounset
 
 
 django-admin migrate
-uwsgi --socket :8000 --chdir /code --wsgi-file galaxy-api/galaxy_api/wsgi.py --master --processes 4 --threads 2 -b 32768
+uwsgi --socket :8000 --chdir /code --module galaxy_api.wsgi:application --master --processes 4 --threads 2 -b 32768

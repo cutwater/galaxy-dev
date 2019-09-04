@@ -14,7 +14,6 @@ spec:
     io.kompose.service: pulp-api
   strategy:
     resources: {}
-    type: Recreate
   template:
     metadata:
       creationTimestamp: null
@@ -56,14 +55,7 @@ spec:
         ports:
         - containerPort: 8000
         resources: {}
-        volumeMounts:
-        - mountPath: /data
-          name: pulp-data
       restartPolicy: Always
-      volumes:
-      - name: pulp-data
-        persistentVolumeClaim:
-          claimName: pulp-data
   test: false
   triggers:
   - type: ConfigChange

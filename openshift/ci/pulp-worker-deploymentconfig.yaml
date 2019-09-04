@@ -14,7 +14,6 @@ spec:
     io.kompose.service: pulp-worker
   strategy:
     resources: {}
-    type: Recreate
   template:
     metadata:
       creationTimestamp: null
@@ -54,14 +53,7 @@ spec:
         image: ' '
         name: pulp-worker
         resources: {}
-        volumeMounts:
-        - mountPath: /data
-          name: pulp-data
       restartPolicy: Always
-      volumes:
-      - name: pulp-data
-        persistentVolumeClaim:
-          claimName: pulp-data
   test: false
   triggers:
   - type: ConfigChange

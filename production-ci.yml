@@ -3,7 +3,6 @@ version: '3'
 volumes:
   postgres_data: {}
   redis_data: {}
-  pulp_data: {}
 
 services:
 
@@ -30,8 +29,6 @@ services:
     command: ['run', 'api']
     ports:
       - '5002:8000'
-    volumes:
-      - pulp_data:/data
     depends_on:
       - postgres
       - redis
@@ -44,8 +41,6 @@ services:
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'resource-manager']
-    volumes:
-      - pulp_data:/data
     depends_on:
       - postgres
       - redis
@@ -58,8 +53,6 @@ services:
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'worker']
-    volumes:
-      - pulp_data:/data
     depends_on:
       - postgres
       - redis
@@ -72,8 +65,6 @@ services:
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'content-app']
-    volumes:
-      - pulp_data:/data
     depends_on:
       - postgres
       - redis

@@ -3,6 +3,10 @@ data:
   GALAXY_DB_HOST: postgres
   GALAXY_DB_PASSWORD: galaxy123
   GALAXY_DEBUG: "True"
+  GALAXY_PULP_API_HOST: pulp-api
+  GALAXY_PULP_API_PASSWORD: admin
+  GALAXY_PULP_API_PORT: "5002"
+  GALAXY_PULP_API_USER: admin
   GALAXY_SECRET_KEY: secret
 kind: ConfigMap
 metadata:

@@ -37,6 +37,26 @@ spec:
             configMapKeyRef:
               key: GALAXY_DEBUG
               name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_API_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_API_HOST
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_API_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_API_PASSWORD
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_API_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_API_PORT
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_API_USER
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_API_USER
+              name: galaxy-api-env--production--galaxy-api
         - name: GALAXY_SECRET_KEY
           valueFrom:
             configMapKeyRef:

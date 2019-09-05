@@ -16,7 +16,7 @@ RUN yum -y install epel-release \
 RUN mkdir -p /var/run/pulp \
     /var/lib/pulp/tmp
 
-COPY docker/pulp/requirements.txt /tmp/pulp/
+COPY compose/production/pulp/requirements.txt /tmp/pulp/
 
 COPY pulp-ansible /code/pulp-ansible
 

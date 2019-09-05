@@ -1,4 +1,6 @@
 psycopg2-binary
+django-storages
+boto3
 mazer
 packaging
 git+https://github.com/pulp/pulpcore.git#egg=pulpcore

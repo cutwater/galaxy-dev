@@ -18,5 +18,7 @@ MEDIA_ROOT = '/data/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = os.environ['PULP_AWS_STORAGE_BUCKET_NAME']
 AWS_ACCESS_KEY_ID = os.environ['PULP_AWS_KEY_ID']
-AWS_ACCESS_KEY_ID = os.environ['PULP_AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = os.environ['PULP_AWS_ACCESS_KEY']
 AWS_DEFAULT_ACL = None
+
+GALAXY_API_ROOT = 'api/<str:path>/'

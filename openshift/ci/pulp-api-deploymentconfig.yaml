@@ -25,6 +25,21 @@ spec:
         - run
         - api
         env:
+        - name: PULP_AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: PULP_AWS_ACCESS_KEY
+              name: pulp
+        - name: PULP_AWS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: PULP_AWS_KEY_ID
+              name: pulp
+        - name: PULP_AWS_STORAGE_BUCKET_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: PULP_AWS_STORAGE_BUCKET_NAME
+              name: pulp-api-env--production--pulp
         - name: PULP_DB_HOST
           valueFrom:
             configMapKeyRef:

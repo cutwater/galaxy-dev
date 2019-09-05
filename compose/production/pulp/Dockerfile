@@ -38,4 +38,15 @@ VOLUME /data/
 
 WORKDIR /code/
 
+RUN useradd --no-create-home --user-group django
+RUN chmod +x /entrypoint
+RUN chown django /entrypoint
+
+RUN chown django:root /var/run/pulp \
+    /var/lib/pulp/tmp
+RUN chmod g+w /var/run/pulp \
+    /var/lib/pulp/tmp
+
+USER django
+
 ENTRYPOINT [ "/entrypoint" ]

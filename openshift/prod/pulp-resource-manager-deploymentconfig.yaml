@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose -f ../../production-prod.yml --provider OpenShift convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pulp-resource-manager
+  name: pulp-resource-manager
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: pulp-resource-manager
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: pulp-resource-manager
+    spec:
+      containers:
+      - args:
+        - run
+        - resource-manager
+        env:
+        - name: PULP_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: PULP_DB_HOST
+              name: pulp-resource-manager-env--production--pulp
+        - name: PULP_DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: PULP_DB_PASSWORD
+              name: pulp-resource-manager-env--production--pulp
+        - name: PULP_DEBUG
+          valueFrom:
+            configMapKeyRef:
+              key: PULP_DEBUG
+              name: pulp-resource-manager-env--production--pulp
+        - name: PULP_REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: PULP_REDIS_HOST
+              name: pulp-resource-manager-env--production--pulp
+        - name: PULP_SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              key: PULP_SECRET_KEY
+              name: pulp-resource-manager-env--production--pulp
+        image: ' '
+        name: pulp-resource-manager
+        resources: {}
+      restartPolicy: Always
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - pulp-resource-manager
+      from:
+        kind: ImageStreamTag
+        name: pulp-resource-manager:latest
+    type: ImageChange
+status: {}

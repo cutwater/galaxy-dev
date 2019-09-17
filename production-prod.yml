@@ -1,0 +1,98 @@
+version: '3'
+
+volumes:
+  postgres_data: {}
+  redis_data: {}
+
+services:
+
+  galaxy-api:
+    image: registry.insights.openshift.com/automation-hub-prod/galaxy-api
+    build:
+      context: .
+      dockerfile: compose/production/galaxy-api/Dockerfile
+    env_file:
+      - ./.env/.production/.galaxy-api
+      - ./.env/.production/.postgres
+    ports:
+      - '5001:8000'
+    depends_on:
+      - postgres
+
+  pulp-api:
+    image: registry.insights.openshift.com/automation-hub-prod/pulp-api
+    build:
+      context: .
+      dockerfile: compose/production/pulp/Dockerfile
+    env_file:
+      - ./.env/.production/.pulp
+    command: ['run', 'api']
+    ports:
+      - '5002:8000'
+    depends_on:
+      - postgres
+      - redis
+
+  pulp-resource-manager:
+    image: registry.insights.openshift.com/automation-hub-prod/pulp-resource-manager
+    build:
+      context: .
+      dockerfile: compose/production/pulp/Dockerfile
+    env_file:
+      - ./.env/.production/.pulp
+    command: ['run', 'resource-manager']
+    depends_on:
+      - postgres
+      - redis
+
+  pulp-worker:
+    image: registry.insights.openshift.com/automation-hub-prod/pulp-worker
+    build:
+      context: .
+      dockerfile: compose/production/pulp/Dockerfile
+    env_file:
+      - ./.env/.production/.pulp
+    command: ['run', 'worker']
+    depends_on:
+      - postgres
+      - redis
+
+  pulp-content-app:
+    image: registry.insights.openshift.com/automation-hub-prod/pulp-content-app
+    build:
+      context: .
+      dockerfile: compose/production/pulp/Dockerfile
+    env_file:
+      - ./.env/.production/.pulp
+    command: ['run', 'content-app']
+    ports:
+      - '5003:24816'
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: registry.access.redhat.com/rhscl/postgresql-96-rhel7
+    ports:
+      - '5432:5432'
+    env_file:
+      - ./.env/.production/.postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: registry.access.redhat.com/rhscl/redis-32-rhel7
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+
+  automation-hub-backend:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: registry.insights.openshift.com/automation-hub-prod/automation-hub-backend
+    depends_on:
+      - galaxy-api
+    ports:
+      - "8081:8081"

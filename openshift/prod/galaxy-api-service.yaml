@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f ../../production-prod.yml --provider OpenShift convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: galaxy-api
+  name: galaxy-api
+spec:
+  ports:
+  - name: "5001"
+    port: 5001
+    targetPort: 8000
+  selector:
+    io.kompose.service: galaxy-api
+status:
+  loadBalancer: {}

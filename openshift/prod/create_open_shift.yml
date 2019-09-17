@@ -1,0 +1,15 @@
+---
+- name: Create Elements in OpenShift
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - include_vars:
+        file: open_shift_descriptors.yml
+        name: open_shift
+    - debug:
+        var: open_shift
+    - debug:
+        msg: "{{item}}"
+      with_items: "{{open_shift.descriptors}}"
+    - shell: "oc create -f {{item}}"
+      with_items: "{{open_shift.descriptors}}"

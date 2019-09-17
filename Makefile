@@ -62,3 +62,15 @@ docker/build-ci:
 .PHONY: docker/push-ci
 docker/push-ci:
 	docker-compose -f production-ci.yml push
+
+.PHONY: kompose/convert-prod
+kompose/convert-prod:
+	cd openshift/prod && kompose -f ../../production-prod.yml --provider OpenShift convert
+
+.PHONY: docker/build-prod
+docker/build-prod:
+	docker-compose -f production-prod.yml build
+
+.PHONY: docker/push-prod
+docker/push-prod:
+	docker-compose -f production-prod.yml push

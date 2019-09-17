@@ -20,12 +20,10 @@ ENV PYTHONUNBUFFERED=1 \
 
 RUN yum -y install epel-release \
     && yum -y install \
+        gcc \
         git \
         python36 \
         python36-devel \
-        pcre \
-        pcre-devel \
-        gcc \
     && yum -y clean all
 
 COPY galaxy-api/Pipfile \
@@ -40,10 +38,10 @@ RUN python3.6 -m venv "${GALAXY_VENV}" \
         'pip<19.0' \
         wheel \
         pipenv \
+        uwsgi \
     && cd /tmp/galaxy-api \
     && PIPENV_VERBOSITY=-1 pipenv install --ignore-pipfile \
-    && pip install -e /code/galaxy-api \
-    && pip install uwsgi
+    && pip install -e /code/galaxy-api
 
 COPY --from=galaxy-pulp /local/galaxy-pulp /tmp/galaxy-pulp
 RUN source "${GALAXY_VENV}/bin/activate" \
@@ -53,17 +51,19 @@ WORKDIR /code/
 
 ENV PATH="/venv/bin:$PATH"
 
-RUN groupadd django \
-    && adduser -g django django
+RUN useradd \
+    --user-group \
+    --no-create-home \
+    --home-dir /code/ \
+    django
 
-COPY compose/production/galaxy-api/entrypoint /entrypoint
-RUN sed -i 's/\r//' /entrypoint
-RUN chmod +x /entrypoint
-RUN chown django /entrypoint
-COPY compose/production/galaxy-api/start /start
-RUN sed -i 's/\r//' /start
-RUN chmod +x /start
-RUN chown django /start
+COPY --chown=django:root \
+    compose/production/galaxy-api/entrypoint \
+    /entrypoint
+COPY --chown=django:root \
+    compose/production/galaxy-api/start \
+    /start
+RUN chmod +x /entrypoint /start
 
 
 USER django

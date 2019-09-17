@@ -57,10 +57,30 @@ spec:
             configMapKeyRef:
               key: GALAXY_PULP_API_USER
               name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_CONTENT_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_CONTENT_HOST
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_CONTENT_PATH_PREFIX
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_CONTENT_PATH_PREFIX
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_CONTENT_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_CONTENT_PORT
+              name: galaxy-api-env--production--galaxy-api
         - name: GALAXY_SECRET_KEY
           valueFrom:
             configMapKeyRef:
               key: GALAXY_SECRET_KEY
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_USE_X_FORWARDED_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_USE_X_FORWARDED_HOST
               name: galaxy-api-env--production--galaxy-api
         - name: POSTGRESQL_DATABASE
           valueFrom:

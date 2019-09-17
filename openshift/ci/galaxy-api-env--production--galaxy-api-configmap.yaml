@@ -7,7 +7,11 @@ data:
   GALAXY_PULP_API_PASSWORD: admin
   GALAXY_PULP_API_PORT: "5002"
   GALAXY_PULP_API_USER: admin
+  GALAXY_PULP_CONTENT_HOST: pulp-content-app
+  GALAXY_PULP_CONTENT_PATH_PREFIX: /api/automation-hub/v3/artifacts/collections/
+  GALAXY_PULP_CONTENT_PORT: "5003"
   GALAXY_SECRET_KEY: secret
+  GALAXY_USE_X_FORWARDED_HOST: "True"
 kind: ConfigMap
 metadata:
   creationTimestamp: null

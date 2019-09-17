@@ -67,6 +67,8 @@ spec:
               name: pulp-content-app-env--production--pulp
         image: ' '
         name: pulp-content-app
+        ports:
+        - containerPort: 24816
         resources: {}
       restartPolicy: Always
   test: false

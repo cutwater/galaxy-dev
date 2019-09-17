@@ -65,6 +65,8 @@ services:
     env_file:
       - ./.env/.production/.pulp
     command: ['run', 'content-app']
+    ports:
+      - '5003:24816'
     depends_on:
       - postgres
       - redis

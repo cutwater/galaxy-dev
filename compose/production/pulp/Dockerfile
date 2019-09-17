@@ -29,6 +29,8 @@ RUN python3.6 -m venv "${PULP_VENV}" \
     && pip install -r requirements.txt \
     && pip install -e /code/pulp-ansible
 
+COPY docker/pulp/ansible.cfg /etc/ansible/ansible.cfg
+
 ENV PATH="/venv/bin:$PATH"
 
 COPY compose/production/pulp/entrypoint.sh /entrypoint

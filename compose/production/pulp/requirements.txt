@@ -1,7 +1,6 @@
+ansible==2.9.0b1
 psycopg2-binary
-django-storages
-boto3
-mazer
-packaging
-git+https://github.com/pulp/pulpcore.git#egg=pulpcore
-git+https://github.com/pulp/pulpcore-plugin.git#egg=pulpcore_plugin
+django-storages[boto3]
+
+git+https://github.com/pulp/pulpcore.git@800e70f73caf1f5a12e849887729b4bb0875a2fd#egg=pulpcore
+git+https://github.com/pulp/pulpcore-plugin.git@2e911fe8623030cf9481a9013043e710bf7e4c23#egg=pulpcore_plugin

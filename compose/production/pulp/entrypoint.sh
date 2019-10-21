@@ -28,7 +28,7 @@ _wait_for_tcp_port() {
 }
 
 _prepare_env() {
-  _wait_for_tcp_port postgres 5432
+  _wait_for_tcp_port "${PULP_DB_HOST:-postgres}" "${PULP_DB_PORT:-5432}"
   _wait_for_tcp_port redis 6379
 }
 

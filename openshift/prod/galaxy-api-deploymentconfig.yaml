@@ -24,23 +24,63 @@ spec:
       - env:
         - name: GALAXY_DB_HOST
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: GALAXY_DB_HOST
-              name: galaxy-api-env--production--galaxy-api
+              name: galaxy
         - name: GALAXY_DB_PASSWORD
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: GALAXY_DB_PASSWORD
-              name: galaxy-api-env--production--galaxy-api
+              name: galaxy
         - name: GALAXY_DEBUG
           valueFrom:
             configMapKeyRef:
               key: GALAXY_DEBUG
               name: galaxy-api-env--production--galaxy-api
-        - name: GALAXY_SECRET_KEY
+        - name: GALAXY_PULP_API_HOST
           valueFrom:
             configMapKeyRef:
+              key: GALAXY_PULP_API_HOST
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_API_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_API_PASSWORD
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_API_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_API_PORT
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_API_USER
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_API_USER
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_CONTENT_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_CONTENT_HOST
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_CONTENT_PATH_PREFIX
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_CONTENT_PATH_PREFIX
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_PULP_CONTENT_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_PULP_CONTENT_PORT
+              name: galaxy-api-env--production--galaxy-api
+        - name: GALAXY_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
               key: GALAXY_SECRET_KEY
+              name: galaxy
+        - name: GALAXY_USE_X_FORWARDED_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: GALAXY_USE_X_FORWARDED_HOST
               name: galaxy-api-env--production--galaxy-api
         - name: POSTGRESQL_DATABASE
           valueFrom:
@@ -49,14 +89,14 @@ spec:
               name: galaxy-api-env--production--postgres
         - name: POSTGRESQL_HOST
           valueFrom:
-            configMapKeyRef:
-              key: POSTGRESQL_HOST
-              name: galaxy-api-env--production--postgres
+            secretKeyRef:
+              key: GALAXY_DB_HOST
+              name: galaxy
         - name: POSTGRESQL_PASSWORD
           valueFrom:
-            configMapKeyRef:
-              key: POSTGRESQL_PASSWORD
-              name: galaxy-api-env--production--postgres
+            secretKeyRef:
+              key: GALAXY_DB_PASSWORD
+              name: galaxy
         - name: POSTGRESQL_PORT
           valueFrom:
             configMapKeyRef:

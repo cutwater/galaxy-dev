@@ -25,16 +25,31 @@ spec:
         - run
         - resource-manager
         env:
+        - name: PULP_AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: PULP_AWS_ACCESS_KEY
+              name: pulp
+        - name: PULP_AWS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: PULP_AWS_KEY_ID
+              name: pulp
+        - name: PULP_AWS_STORAGE_BUCKET_NAME
+          valueFrom:
+            secretKeyRef:
+              key: PULP_AWS_STORAGE_BUCKET_NAME
+              name: pulp
         - name: PULP_DB_HOST
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: PULP_DB_HOST
-              name: pulp-resource-manager-env--production--pulp
+              name: pulp
         - name: PULP_DB_PASSWORD
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: PULP_DB_PASSWORD
-              name: pulp-resource-manager-env--production--pulp
+              name: pulp
         - name: PULP_DEBUG
           valueFrom:
             configMapKeyRef:
@@ -47,9 +62,9 @@ spec:
               name: pulp-resource-manager-env--production--pulp
         - name: PULP_SECRET_KEY
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: PULP_SECRET_KEY
-              name: pulp-resource-manager-env--production--pulp
+              name: pulp
         image: ' '
         name: pulp-resource-manager
         resources: {}

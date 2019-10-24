@@ -30,6 +30,7 @@ _wait_for_tcp_port() {
 _prepare_env() {
   _wait_for_tcp_port "${PULP_DB_HOST:-postgres}" "${PULP_DB_PORT:-5432}"
   _wait_for_tcp_port redis 6379
+  django-admin migrate
 }
 
 run_service() {
@@ -54,7 +55,13 @@ run_service() {
 
 run_api() {
   _prepare_env
-  exec django-admin runserver '0.0.0.0:8000'
+  exec uwsgi \
+      --master \
+      --http-socket :8000 \
+      --module 'pulpcore.app.wsgi:application' \
+      --processes 4 \
+      --threads 2 \
+      --buffer-size 32768
 }
 
 run_resource_manager() {
@@ -79,7 +86,6 @@ run_content_app() {
 }
 
 manage() {
-  _prepare_env
   exec django-admin "$@"
 }
 
